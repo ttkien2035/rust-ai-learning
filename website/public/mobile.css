@@ -1,0 +1,115 @@
+/* Touch-first reading layout, including phone landscape and display cutouts. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:90px}
+.nav-close,.nav-backdrop{display:none}
+.shell,main,.lesson-layout,.two-col,.session-grid,.session-card,.card{min-width:0}
+.prose pre,.prose table{overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.prose pre:focus-visible,.prose table:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(max-width:1024px){
+  body.nav-open{overflow:hidden}
+  .sidebar{width:min(330px,88vw);height:100vh;height:100dvh;padding:calc(28px + env(safe-area-inset-top)) 22px calc(22px + env(safe-area-inset-bottom));transform:translateX(-110%);transition:transform .2s ease;box-shadow:none;overflow-y:auto;overscroll-behavior:contain;z-index:50;visibility:hidden}
+  .sidebar.open{transform:translateX(0);visibility:visible;box-shadow:12px 0 45px #14231930}
+  .sidebar .brand{margin:0 0 35px;font-size:20px;flex-shrink:0}
+  .sidebar .brand-sub{font-size:9px}
+  .sidebar-label{font-size:10px}
+  .sidebar nav a{min-height:48px;font-size:14px;padding:12px;gap:12px}
+  .sidebar-course a{min-height:44px;font-size:12px;align-items:center}
+  .sidebar-course a span:first-child{font-size:13px}
+  .sidebar-bottom{font-size:12px;padding-top:25px;flex-shrink:0}
+  .sidebar-bottom small{font-size:11px}
+  .nav-close{display:grid;place-items:center;position:absolute;right:12px;top:calc(16px + env(safe-area-inset-top));width:44px;height:44px;border-radius:8px;background:#f0f3e9;color:var(--ink);font-size:18px}
+  .nav-backdrop:not([hidden]){display:block;position:fixed;inset:0;background:#10201680;z-index:40;touch-action:none}
+  .shell{margin-left:0}
+  .topbar{position:sticky;top:0;z-index:25;height:auto;min-height:66px;padding:calc(7px + env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 7px max(12px,env(safe-area-inset-left));gap:10px;background:#fafaf7f5;backdrop-filter:blur(12px)}
+  .menu-toggle{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;padding:0;background:none;color:var(--ink);font-size:22px;border-radius:8px}
+  .breadcrumb{flex:1;min-width:0;letter-spacing:.8px;font-size:9px}
+  .breadcrumb strong{font-size:12px}
+  .topbar-right{font-size:11px;flex-shrink:0}
+  main{padding-left:max(24px,env(safe-area-inset-left));padding-right:max(24px,env(safe-area-inset-right));min-height:calc(100svh - 150px)}
+  .btn,.filter,.completion-btn,.tab{min-height:44px;touch-action:manipulation}
+  .btn{font-size:13px;white-space:normal}
+  .filter{font-size:12px;padding:10px 15px}
+  .tab{font-size:14px;padding:12px 2px}
+  .tabs{gap:22px;scrollbar-width:thin}
+  .search,.note-area{font-size:16px}
+  .search{min-height:48px}
+  .prose{font-size:16px;line-height:1.85}
+  .prose h1{font-size:27px}
+  .prose h2{font-size:23px;line-height:1.4}
+  .prose h3{font-size:19px;line-height:1.45}
+  .prose pre{font-size:13px;line-height:1.8;padding-top:54px;max-width:100%;white-space:pre;overflow-wrap:normal}
+  .prose pre code{font-size:inherit}
+  .prose .code-copy{min-width:52px;min-height:44px;top:4px;font-size:12px}
+  .prose table{font-size:14px;max-width:100%}
+  .prose th,.prose td{min-width:140px;padding:12px}
+  .prose .btn{font-size:13px;text-decoration:none}
+  .note-area{min-height:190px;scroll-margin-top:100px}
+  .notes-label{font-size:13px}
+  .save-hint{font-size:12px}
+  .lesson-aside h3{font-size:16px}
+  .lesson-aside p{font-size:13px}
+  .lesson-aside .eyebrow{font-size:10px}
+  .completion-btn{font-size:14px}
+  .callout{font-size:14px;line-height:1.8}
+  .coach-option{min-height:64px;font-size:14px}
+  .prompt-preview{font-size:14px;line-height:1.85}
+  .quiz-item strong{font-size:16px}
+  .back-link{font-size:13px;min-height:44px;display:inline-flex;align-items:center}
+  .meta-row{font-size:12px;gap:12px}
+  .notebook-card p{font-size:15px}
+  .empty{font-size:15px}
+  footer{padding-bottom:calc(20px + env(safe-area-inset-bottom));font-size:11px}
+  .toast{bottom:calc(16px + env(safe-area-inset-bottom));font-size:13px;width:max-content;max-width:calc(100vw - 32px)}
+}
+@media(max-width:640px){
+  main{padding:25px max(16px,env(safe-area-inset-right)) 35px max(16px,env(safe-area-inset-left))}
+  .topbar{gap:7px}
+  .topbar-right{font-size:10px;gap:5px}
+  .topbar-divider{margin:0 2px}
+  .breadcrumb span{margin:0 7px}
+  .intro{align-items:flex-start;gap:12px}
+  .intro h1{font-size:28px;line-height:1.25}
+  .intro p{font-size:14px;line-height:1.75}
+  .eyebrow{font-size:10px;letter-spacing:1.2px}
+  .hero{padding:25px 23px}
+  .hero h1{font-size:clamp(30px,8vw,36px)}
+  .hero p{font-size:14px;line-height:1.8}
+  .hero .btn{width:100%;font-size:14px;margin-top:8px}
+  .stats{gap:20px 0;padding:20px 0}
+  .stat{min-width:0;padding:0 18px}
+  .stat strong{font-size:24px}
+  .stat strong span{font-size:13px}
+  .stat small{font-size:12px;line-height:1.6;display:block;margin-top:5px}
+  .section-heading{gap:12px;align-items:center}
+  .section-heading h2{font-size:20px;flex:1}
+  .section-heading .eyebrow{display:none}
+  .text-link{font-size:12px;display:inline-flex;align-items:center;min-height:44px}
+  .session-label{font-size:10px;line-height:1.7}
+  .continue h3{font-size:23px}
+  .continue p{font-size:14px}
+  .continue .btn{width:100%}
+  .progress-top{gap:12px}
+  .progress-card p,.check-row{font-size:13px}
+  .check-row small{font-size:12px}
+  .outcome h3{font-size:15px}
+  .outcome p{font-size:13px}
+  .coach-banner{align-items:flex-start;gap:12px}
+  .coach-banner>div{min-width:0;flex:1}
+  .coach-banner h3{font-size:16px;line-height:1.5}
+  .coach-banner p{font-size:13px}
+  .coach-banner .btn{width:100%}
+  .session-card h3{font-size:20px}
+  .session-card p{font-size:14px}
+  .session-card .bottom{font-size:12px;gap:10px;flex-wrap:wrap}
+  .phase-heading h2{font-size:20px}
+  .session-header h1{font-size:30px;line-height:1.3}
+  .session-header>p{font-size:15px;line-height:1.8}
+  .prose{padding:22px 17px}
+  .lesson-aside .card{padding:20px}
+  .session-pagination .btn{font-size:13px;padding:12px;flex:1}
+  .coach-option{font-size:14px;line-height:1.7}
+  .coach-option strong{display:block;margin-bottom:3px}
+  .notebook-actions{display:grid;grid-template-columns:1fr}
+  .notebook-actions .btn{font-size:14px}
+  .download-row .btn{flex:1 1 140px}
+}
+@media(max-width:370px){.topbar-right{display:none}.breadcrumb{font-size:9px}.hero h1{font-size:29px}.stat{padding:0 13px}.tabs{gap:17px}.tab{font-size:13px}}

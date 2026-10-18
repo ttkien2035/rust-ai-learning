@@ -1,0 +1,18 @@
+**/target/
+**/__pycache__/
+.venv/
+
+# Generated deployment packages, previews, and local tool state.
+/*-package/
+/*-stage/
+/tmp/
+/*.tar.gz
+/*.png
+**/node_modules/
+website/dist/
+website/.wrangler/
+website/.sites-runtime/
+website/.git/
+**/.env
+**/.env.*
+**/*.tsbuildinfo

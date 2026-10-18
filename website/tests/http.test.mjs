@@ -1,0 +1,31 @@
+// Local preview only. Does not call models or alter the hosted database.
+import assert from 'node:assert/strict';
+const origin='http://127.0.0.1:5173';
+const sign=await fetch(origin+'/signin-with-chatgpt?return_to=/',{redirect:'manual'});
+const cookie=sign.headers.getSetCookie().map(x=>x.split(';')[0]).join('; ');
+assert.ok(cookie,'Local sign-in cookie required');
+const request=async(path,method='GET',body,extra={})=>{
+ const r=await fetch(origin+path,{method,headers:{cookie,...(body?{'Content-Type':'application/json',Origin:origin}:{}),...extra},body:body?JSON.stringify(body):undefined});
+ const text=await r.text();let data;try{data=JSON.parse(text);}catch{data={error:text};}return {status:r.status,data};
+};
+assert.equal((await fetch(origin+'/api/state')).status,401);
+let r=await request('/api/state');assert.equal(r.status,200);assert.ok(r.data.user.id);
+const baseline=r.data.state.notes[12]||'';
+const tag='local-test-'+Date.now();
+assert.equal((await request('/api/state','PATCH',{changes:[{key:'notes.12',base:baseline,value:tag}]},{Origin:'https://other.invalid'})).status,403);
+assert.equal((await request('/api/state','PATCH',{changes:[{key:'notes.23',base:'',value:'invalid'}]})).status,400);
+r=await request('/api/state','PATCH',{changes:[{key:'notes.12',base:baseline,value:tag}]});assert.equal(r.status,200);
+assert.equal((await request('/api/state')).data.state.notes[12],tag);
+r=await request('/api/state','PATCH',{changes:[{key:'notes.12',base:baseline,value:'stale device'}]});assert.equal(r.status,409);assert.deepEqual(r.data.conflicts,['notes.12']);
+const mcp=await request('/mcp','POST',{jsonrpc:'2.0',id:1,method:'tools/call',params:{name:'get_course_session',arguments:{session:12}}});
+assert.equal(mcp.status,200);assert.equal(mcp.data.result.structuredContent.notes,tag);assert.equal(mcp.data.result.structuredContent.session.id,12);
+const unauth=await fetch(origin+'/mcp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:2,method:'tools/call',params:{name:'get_learning_progress'}})});assert.equal(unauth.status,401);
+assert.equal((await request('/api/state','PATCH',{changes:[{key:'notes.12',base:tag,value:baseline}]})).status,200);
+const advancedBefore=(await request('/api/state')).data.state;
+const advancedNote=advancedBefore.notes[22]||'';
+r=await request('/api/state','PATCH',{changes:[{key:'notes.22',base:advancedNote,value:tag},{key:'lastSession',base:advancedBefore.lastSession,value:22}]});assert.equal(r.status,200);
+const advancedMcp=await request('/mcp','POST',{jsonrpc:'2.0',id:4,method:'tools/call',params:{name:'get_active_learning_context'}});
+assert.equal(advancedMcp.data.result.structuredContent.session.id,22);assert.equal(advancedMcp.data.result.structuredContent.notes,tag);assert.equal(advancedMcp.data.result.structuredContent.session.checkpoints.length,3);
+assert.equal((await request('/api/state','PATCH',{changes:[{key:'notes.22',base:tag,value:advancedNote},{key:'lastSession',base:22,value:advancedBefore.lastSession}]})).status,200);
+const discovery=await fetch(origin+'/mcp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:3,method:'tools/list'})});assert.equal(discovery.status,200);assert.equal((await discovery.json()).result.tools.length,3);
+console.log('PASS: authenticated persistence, cross-origin rejection, validation, conflict retention, MCP context, unauthorized denial, and data-free tool discovery. Local test note restored.');

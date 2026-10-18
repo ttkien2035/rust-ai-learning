@@ -1,0 +1,62 @@
+[
+  [
+    "Why return None for an empty latency sample?",
+    "How does a borrowed slice differ from an owned Vec?",
+    "What happens when you add a semicolon to a final expression?"
+  ],
+  [
+    "Explain move, borrow, and clone using a prompt String.",
+    "Why can a trimmed &str borrow from its input?",
+    "When is cloning the right ownership decision?"
+  ],
+  [
+    "What invalid states can an enum prevent?",
+    "What does the ? operator do on an error?",
+    "Why does a timeout not prove that a side effect did not happen?"
+  ],
+  [
+    "Which input owns the document returned by your API?",
+    "How do iter, iter_mut, and into_iter differ?",
+    "How are equal and nonfinite scores handled?"
+  ],
+  [
+    "What can still grow in a line-by-line pipeline?",
+    "How do you enforce a hard line-size cap?",
+    "Why are characters different from model tokens?"
+  ],
+  [
+    "What does Arc guarantee, and what does it not guarantee?",
+    "How do you bound producer/consumer imbalance?",
+    "What evidence justifies parallel workers?"
+  ],
+  [
+    "What makes a future progress?",
+    "Why does a spawned task need suitable ownership?",
+    "What happens when a JoinHandle is dropped?"
+  ],
+  [
+    "Why is a semaphore not a complete memory bound?",
+    "How does queue time consume the deadline?",
+    "How are permits recovered after cancellation?"
+  ],
+  [
+    "Which validation happens before admission?",
+    "Why reuse the upstream HTTP client?",
+    "How do liveness and readiness differ?"
+  ],
+  [
+    "When can the HTTP status no longer change?",
+    "Why must a permit live for the whole stream?",
+    "What happens on downstream disconnect?"
+  ],
+  [
+    "What costs exist at the Python–Rust boundary?",
+    "How do you guarantee equivalent benchmark behavior?",
+    "When would you keep the implementation in Python?"
+  ],
+  [
+    "Which invariants are enforced by types versus tests?",
+    "Where can memory or unfinished work still accumulate?",
+    "What evidence supports or rejects the Rust boundary?"
+  ]
+]

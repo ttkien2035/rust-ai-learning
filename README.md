@@ -16,6 +16,8 @@ The capstone combines these ideas into a small AI service gateway. Model trainin
 
 ## Start here
 
+- [Session learning routes](course/LEARNING_PATHS.md): worked examples, focused core probes, and AI-assisted projects for all 22 sessions.
+- [Mastery and review](course/MASTERY.md): explain, verify, debug, and adapt, including AI-assisted implementations.
 - [Research and course selection](course/RESEARCH.md): sources, GitHub repositories, tradeoffs, and selection rationale.
 - [Schedule and outcomes](course/SYLLABUS.md): a 96-hour core followed by a 100-hour advanced optimization track.
 - [Windows setup](course/SETUP.md): compiler, editor, and commands.
